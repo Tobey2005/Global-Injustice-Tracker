@@ -36,6 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 
-credentials.env
+src/main/resources/credentials.env
 
 

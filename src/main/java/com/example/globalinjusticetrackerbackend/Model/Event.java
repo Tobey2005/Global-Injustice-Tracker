@@ -1,13 +1,12 @@
 package com.example.globalinjusticetrackerbackend.Model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Event {
@@ -16,20 +15,33 @@ public class Event {
     private int id;
 
     private String source;
-    private String country;
+    @ManyToMany
+    @JoinTable(
+            name = "country_event",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "country_id")
+    )
+    private Set<Country> countries = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "Event_EventType",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_type_id")
+    )
+    private Set<EventType> eventTypes = new HashSet<>();
+
     private LocalDate date;
-    private String eventType;
+
     private LocalDateTime createdAt;
 
     public Event() {}
 
-    public Event(String source, String country, LocalDate date, String eventType, LocalDateTime createdAt) {}
+    public Event(String source, Set<Country> countries, LocalDate date, Set<Country> eventTypes, LocalDateTime createdAt) {}
 
     public int getId() {
         return id;
     }
-
-
 
     public String getSource() {
         return source;
@@ -40,12 +52,13 @@ public class Event {
     }
 
 
-    public String getCountry() {
-        return country;
+    public Set<Country> getCountry() {
+        return countries;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountry(Set<Country> countries) {
+
+        this.countries = countries;
     }
 
     public LocalDate getDate() {
@@ -56,12 +69,12 @@ public class Event {
         this.date = date;
     }
 
-    public String getEventType() {
-        return eventType;
+    public Set<EventType> getEventType() {
+        return eventTypes;
     }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
+    public void setEventType(Set<EventType> eventTypes) {
+        this.eventTypes = eventTypes;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -73,7 +86,7 @@ public class Event {
 
     }
 
-    public String toString(String source, String country, LocalDate date, String eventType, LocalDateTime createdAt) {
+    public String toString(String source, Set<Country> country, LocalDate date, String eventType, LocalDateTime createdAt) {
         return "Event Information: " + "source = " + source + "country = " + country + "date = " + date + "eventType = " + eventType + "createdAt = " + createdAt.toString();
     }
 
