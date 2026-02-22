@@ -7,6 +7,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(
+        name = "country",
+        uniqueConstraints = @UniqueConstraint(
+                name = "unique_country",
+                columnNames = {"name", "continent"}
+        )
+)
 public class Country {
 
 
@@ -16,18 +23,32 @@ public class Country {
 
     private String name;
 
-    private int population;
+    private String countryCode;
+
+
 
     private String continent;
+
+    @OneToMany(
+            mappedBy = "country",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch =  FetchType.LAZY
+    )
+
+
+    private Set<PopulationHistory> populationHistory;
 
     @ManyToMany(mappedBy="countries")
     private Set<Event> Events = new HashSet<>();
 
     public Country() {}
 
-    public Country(String name, int population) {
+    public Country(String name, String countryCode, String continent) {
         this.name = name;
-        this.population = population;
+        this.continent = continent;
+        this.countryCode = countryCode;
+
     }
 
     public long getId() {
@@ -42,14 +63,6 @@ public class Country {
         this.name = name;
     }
 
-    public int getPopulation() {
-        return population;
-    }
-
-    public void setPopulation(int population) {
-        this.population = population;
-    }
-
     public Set<Event> getEvents() {
         return Events;
     }
@@ -61,6 +74,16 @@ public class Country {
     public void setContinent(String continent) {
         this.continent = continent;
     }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+
 
 
 
