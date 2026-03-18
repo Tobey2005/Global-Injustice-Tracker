@@ -3,11 +3,11 @@ package com.example.globalinjusticetrackerbackend.DTO;
 public class PopulationHistoryDTO {
 
     public String country;
-    public int population;
+    public long population;
     public int year;
     public String country_code;
 
-    public PopulationHistoryDTO(String country, int population, int year, String country_code) {
+    public PopulationHistoryDTO(String country, long population, int year, String country_code) {
         this.population = population;
         this.year = year;
         this.country_code = country_code;
@@ -15,11 +15,11 @@ public class PopulationHistoryDTO {
 
     }
 
-    public int getPopulation() {
+    public long getPopulation() {
         return population;
     }
 
-    public void setPopulation(int population) {
+    public void setPopulation(long population) {
         this.population = population;
     }
 

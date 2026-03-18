@@ -23,6 +23,7 @@ public class Country {
 
     private String name;
 
+    @Column(name = "country_code", length = 3)
     private String countryCode;
 
 
@@ -35,7 +36,6 @@ public class Country {
             orphanRemoval = true,
             fetch =  FetchType.LAZY
     )
-
 
     private Set<PopulationHistory> populationHistory;
 
@@ -79,8 +79,8 @@ public class Country {
         return countryCode;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setCountryCode(String country_code) {
+        this.countryCode = country_code;
     }
 
 

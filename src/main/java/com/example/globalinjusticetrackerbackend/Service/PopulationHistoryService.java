@@ -3,7 +3,6 @@ package com.example.globalinjusticetrackerbackend.Service;
 
 import com.example.globalinjusticetrackerbackend.DTO.PopulationHistoryDTO;
 import com.example.globalinjusticetrackerbackend.Model.Country;
-import com.example.globalinjusticetrackerbackend.Model.PopulationHistory;
 import com.example.globalinjusticetrackerbackend.Repository.CountryRepository;
 import com.example.globalinjusticetrackerbackend.Repository.PopulationHistoryRepository;
 import org.springframework.stereotype.Service;
@@ -39,7 +38,7 @@ public class PopulationHistoryService {
 
 
             populationHistoryRepository.upsertPopulationHistory(
-                    populationHistoryDTO.getCountryCode(),
+                    country.getId(),
                     populationHistoryDTO.getYear(),
                     populationHistoryDTO.getPopulation());
 

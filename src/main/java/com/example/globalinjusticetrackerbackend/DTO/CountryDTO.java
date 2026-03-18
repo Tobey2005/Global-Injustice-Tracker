@@ -5,12 +5,12 @@ import com.example.globalinjusticetrackerbackend.Model.Country;
 public class CountryDTO {
 
     public String name;
-    public int population;
+    public long population;
     public String continent;
 
 
 
-    public CountryDTO(String name, int population, String continent) {
+    public CountryDTO(String name, long population, String continent) {
         this.name = name;
         this.population = population;
         this.continent = continent;
@@ -24,7 +24,7 @@ public class CountryDTO {
         this.name = name;
     }
 
-    public int getPopulation() {
+    public long getPopulation() {
         return population;
     }
 

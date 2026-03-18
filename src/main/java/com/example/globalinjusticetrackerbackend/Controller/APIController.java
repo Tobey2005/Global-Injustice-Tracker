@@ -1,9 +1,8 @@
 package com.example.globalinjusticetrackerbackend.Controller;
 
 
-import com.example.globalinjusticetrackerbackend.DTO.CountryDTO;
+
 import com.example.globalinjusticetrackerbackend.DTO.PopulationHistoryDTO;
-import com.example.globalinjusticetrackerbackend.Service.CountryService;
 import com.example.globalinjusticetrackerbackend.Service.PopulationHistoryService;
 
 
@@ -24,7 +23,7 @@ public class APIController {
 
 
 
-    @PostMapping("/internal/countrypopulation")
+    @PostMapping("/internal/countrypopulation/bulk")
     public ResponseEntity<Void> uploadPopulationHistory(@RequestBody List<PopulationHistoryDTO> rows) {
 
         populationHistoryService.saveAllRows(rows);

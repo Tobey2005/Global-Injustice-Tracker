@@ -24,26 +24,24 @@ public class PopulationHistory {
     )
     private Country country;
     @Column(nullable = false)
-    private int population;
+    private long population;
 
     @Column(nullable = false)
     private int year;
 
-    private String country_code;
 
     public PopulationHistory() {}
 
-    public PopulationHistory(int population, int year, String country_code) {
+    public PopulationHistory(int population, int year) {
         this.population = population;
         this.year = year;
-        this.country_code = country_code;
     }
 
     public Long getId() {
         return id;
     }
 
-    public int getPopulation() {
+    public long getPopulation() {
         return population;
     }
 
@@ -57,14 +55,6 @@ public class PopulationHistory {
 
     public void setYear(int year) {
         this.year = year;
-    }
-
-    public String getCountry_code() {
-        return country_code;
-    }
-
-    public void setCountry_code(String country_code) {
-        this.country_code = country_code;
     }
 
 }

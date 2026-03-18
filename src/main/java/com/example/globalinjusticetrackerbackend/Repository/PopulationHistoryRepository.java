@@ -9,16 +9,16 @@ public interface PopulationHistoryRepository extends JpaRepository<PopulationHis
 
     @Modifying
     @Query(value = """
-            INSERT INTO population_history (country_code, year, population)
-            VALUES (:country_code, :year, :population)
-            ON CONFLICT (country_code, year)
+            INSERT INTO population_history (country_id, year, population)
+            VALUES (:country_id, :year, :population)
+            ON CONFLICT (country_id, year)
             DO UPDATE SET population = EXCLUDED.population
             """, nativeQuery = true
     )
     void upsertPopulationHistory(
-            @Param("country_code") String country_code,
+            @Param("country_id") long country_id,
             @Param("year") int year,
-            @Param("population") int population
+            @Param("population") long population
             );
 
 
