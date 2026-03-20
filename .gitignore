@@ -40,3 +40,4 @@ src/main/resources/credentials.env
 
 
 Global-Injustice-Tracker-Backend/.env.credentials
+.DS_Store
