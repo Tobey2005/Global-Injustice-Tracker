@@ -20,7 +20,7 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
     void upsertCountry(@Param("name") String name, @Param("continent") String continent);
 
 
-    Optional<Country> findByCountryCode(String name);
+    Optional<Country> findByCountryCode(String countryCode);
 }
 
 

@@ -2,7 +2,9 @@ package com.example.globalinjusticetrackerbackend.Controller;
 
 
 
+import com.example.globalinjusticetrackerbackend.DTO.AnalysisResultDTO;
 import com.example.globalinjusticetrackerbackend.DTO.PopulationHistoryDTO;
+import com.example.globalinjusticetrackerbackend.Service.AnalysisResultService;
 import com.example.globalinjusticetrackerbackend.Service.PopulationHistoryService;
 
 
@@ -16,9 +18,11 @@ import java.util.List;
 public class APIController {
 
     private final PopulationHistoryService populationHistoryService;
+    private final AnalysisResultService analysisResultService;
 
-    public APIController(PopulationHistoryService populationHistoryService) {
+    public APIController(PopulationHistoryService populationHistoryService, AnalysisResultService analysisResultService) {
         this.populationHistoryService = populationHistoryService;
+        this.analysisResultService = analysisResultService;
     }
 
 
@@ -31,4 +35,24 @@ public class APIController {
 
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/internal/analysisresults/bulk")
+    public ResponseEntity<Void> uploadAnalysisResult(@RequestBody List<AnalysisResultDTO> rows) {
+
+        analysisResultService.saveAllAnalysisResults(rows);
+
+        return ResponseEntity.ok().build();
+
+    }
+
+    @GetMapping("/public/analysisresults")
+    public ResponseEntity<List<AnalysisResultDTO>> getAnalysisResults(@RequestParam String countryCode) {
+        List<AnalysisResultDTO> analysisResultList = analysisResultService.getAnalysisResultsForCountry(countryCode);
+
+        return ResponseEntity.ok(analysisResultList);
+    }
+
+
+
+
 }
